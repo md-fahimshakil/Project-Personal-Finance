@@ -1,0 +1,120 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>মিতব্যয়ী</title>
+<style>
+:root{--p:#ff5fa2;--p2:#ffd6e8;--g:#2fbf71;--g2:#d8f5e5;--bg:#fff6fa;--t:#3a2a33;--r:20px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,'Noto Sans Bengali',sans-serif;background:var(--bg);color:var(--t);padding-bottom:84px}
+header{background:linear-gradient(135deg,var(--p),#ff8cc0);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 22px;border-radius:0 0 28px 28px;display:flex;align-items:center;gap:10px}
+header img{width:46px;height:46px;border-radius:14px;background:#fff;animation:wig 3s infinite}
+header b{font-size:22px}header small{display:block;opacity:.9}
+main{padding:14px}
+.card{background:#fff;border-radius:var(--r);padding:14px;margin-bottom:12px;box-shadow:0 4px 14px #ff5fa222;animation:pop .35s}
+.row{display:flex;gap:10px;align-items:center}.sp{justify-content:space-between}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{border-radius:var(--r);padding:12px;color:#fff}.in{background:var(--g)}.ex{background:var(--p)}.nt{background:#6b5bd6}.bl{background:#f0a020}
+.stat small{opacity:.9;display:block}.stat b{font-size:19px}
+h3{margin:4px 0 10px}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:6px 0 calc(env(safe-area-inset-bottom,0px) + 6px);box-shadow:0 -4px 16px #ff5fa233;border-radius:22px 22px 0 0}
+nav button{background:none;border:0;font-size:11px;color:#9a8a93;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 8px}
+nav button span{font-size:22px;transition:.2s}nav button.on{color:var(--p);font-weight:700}nav button.on span{transform:translateY(-4px) scale(1.2)}
+.fab{position:fixed;bottom:74px;right:16px;width:58px;height:58px;border-radius:50%;border:0;background:var(--g);color:#fff;font-size:32px;box-shadow:0 6px 18px #2fbf7188;animation:bob 2s infinite;z-index:5}
+button.b,.chip{background:var(--p);color:#fff;border:0;border-radius:14px;padding:10px 14px;font-size:14px}button.g{background:var(--g)}button.s{padding:6px 10px;font-size:12px}button.o{background:#eee;color:var(--t)}
+input,select,textarea{width:100%;padding:11px;border:2px solid var(--p2);border-radius:12px;font-size:15px;margin:4px 0 8px;background:#fff;color:var(--t)}
+input:focus,select:focus{outline:0;border-color:var(--g)}
+label{font-size:12px;color:#8a7a83}
+.tx{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--p2)}.tx:last-child{border:0}
+.ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--p2);font-size:18px}
+.amt{margin-left:auto;font-weight:700;white-space:nowrap}.neg{color:var(--p)}.pos{color:var(--g)}
+.bar{height:12px;background:var(--p2);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--g);border-radius:9px;transition:width .8s}.bar i.w{background:#f0a020}.bar i.d{background:var(--p)}
+.pie{width:130px;height:130px;border-radius:50%;flex:none;animation:spin 1s}
+.lg{font-size:12px;flex:1}.lg div{display:flex;gap:6px;align-items:center;margin:2px 0}.lg i{width:10px;height:10px;border-radius:3px;flex:none}
+.mas{text-align:center;padding:10px}.mas img{width:110px;height:110px;object-fit:contain;animation:bob 2.4s infinite}
+.sheet{position:fixed;inset:0;background:#0006;z-index:20;display:flex;align-items:flex-end;animation:fade .2s}
+.sheet>div{background:#fff;width:100%;max-height:92vh;overflow:auto;border-radius:26px 26px 0 0;padding:18px;animation:up .3s}
+.seg{display:flex;gap:6px;margin-bottom:8px}.seg button{flex:1;padding:10px;border-radius:12px;border:2px solid var(--p2);background:#fff;color:var(--t)}.seg .on{background:var(--p);border-color:var(--p);color:#fff}.seg .on.i{background:var(--g);border-color:var(--g)}
+#lock{position:fixed;inset:0;background:linear-gradient(160deg,var(--p),var(--g));z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;gap:10px}
+#lock img{width:120px;animation:bob 2s infinite}#lock input{width:200px;text-align:center;font-size:24px;letter-spacing:8px}
+#toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--t);color:#fff;padding:10px 16px;border-radius:14px;z-index:99;display:none;max-width:90%}
+.cf{position:fixed;top:-20px;font-size:24px;z-index:99;animation:fall 2.5s forwards}
+@keyframes bob{50%{transform:translateY(-8px)}}@keyframes wig{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(8px)}}@keyframes up{from{transform:translateY(100%)}}@keyframes fade{from{opacity:0}}
+@keyframes spin{from{transform:rotate(-180deg) scale(.3)}}@keyframes fall{to{top:105vh;transform:rotate(540deg)}}
+</style></head><body>
+<div id="lock" style="display:none"><img src="img/Logo.svg"><b style="font-size:26px">মিতব্যয়ী</b><input id="pin" type="password" inputmode="numeric" maxlength="6" placeholder="PIN"><div id="pe"></div></div>
+<div id="toast"></div>
+<header><img src="img/Logo.svg"><div><b>মিতব্যয়ী</b><small id="hi"></small></div></header>
+<main id="m"></main><button class="fab" onclick="addTx()">+</button>
+<nav id="nav"></nav><div id="sh"></div>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const def={tx:[],acc:[{id:1,n:'Cash',b:0},{id:2,n:'bKash',b:0},{id:3,n:'Bank',b:0}],cat:{e:{'Bills & Utilities':['Electricity','Gas','Water','Wi-Fi','Mobile Bill'],Housing:['House Rent','Maintenance','Repairs'],Food:['Groceries','Processed Food','Restaurant','Snacks'],Transport:['Rickshaw','Public Transport','Ride Sharing','Fuel'],Lifestyle:['Clothes','Personal Care','Entertainment'],Education:['Tuition Fees','Books','Courses','Stationery'],Health:['Medicine','Doctor'],Shopping:['Household','Electronics','Other'],Financial:['Bank Fees','Loan'],Misc:['Other']},i:{Salary:[],Tuition:[],Business:[],Freelancing:[],Investment:[],'Other income':[]}},bud:[],goals:[],bills:[],pin:''};
+let D=JSON.parse(localStorage.mitob||'null')||def,S={tab:'home',mo:new Date().toISOString().slice(0,7),q:'',rt:'e',rg:'c'};
+const save=()=>localStorage.mitob=JSON.stringify(D),uid=()=>Date.now()+Math.floor(Math.random()*999),f=n=>'৳'+Math.round(n).toLocaleString('en-IN'),td=()=>new Date().toISOString().slice(0,10);
+const IC={Food:'🍛','Bills & Utilities':'💡',Housing:'🏠',Transport:'🛺',Lifestyle:'🛍️',Education:'📚',Health:'💊',Shopping:'🛒',Financial:'🏦',Misc:'🎲',Salary:'💼',Tuition:'🎓',Business:'🏪',Freelancing:'💻',Investment:'📈','Other income':'🎁'};
+const COL=['#ff5fa2','#2fbf71','#6b5bd6','#f0a020','#20b2c9','#e0457b','#8bc34a','#9c6bd6','#ff8a65','#78909c'];
+const img=n=>`<img src="img/${n}">`;
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',3000)}
+async function notify(title,body,at){try{const L=Capacitor.Plugins.LocalNotifications;await L.schedule({notifications:[{id:uid()%2147483000,title,body,...(at?{schedule:{at}}:{})}]})}catch(e){if(!at)toast(title+' — '+body)}}
+try{Capacitor.Plugins.LocalNotifications.requestPermissions()}catch(e){}
+function confetti(){for(let i=0;i<30;i++){const c=document.createElement('div');c.className='cf';c.textContent=['🎉','💖','💚','✨','🪙'][i%5];c.style.left=Math.random()*100+'vw';c.style.animationDelay=Math.random()*.6+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),3500)}}
+const inM=t=>t.d.slice(0,7)==S.mo;
+const bal=a=>D.tx.reduce((s,t)=>t.t=='i'&&t.acc==a.id?s+t.a:t.t=='e'&&t.acc==a.id?s-t.a:t.t=='t'?s+(t.to==a.id?t.a:0)-(t.acc==a.id?t.a:0):s,a.b);
+const tot=(ty,mo=S.mo,c)=>D.tx.filter(t=>t.t==ty&&t.d.slice(0,7)==mo&&(!c||t.c==c)).reduce((s,t)=>s+t.a,0);
+const prev=()=>{const d=new Date(S.mo+'-01');d.setMonth(d.getMonth()-1);return d.toISOString().slice(0,7)};
+const tabs=[['home','🏠','Home'],['tx','🧾','লেনদেন'],['rep','📊','Reports'],['bud','🎯','Budget'],['set','⚙️','Settings']];
+function go(t){S.tab=t;draw()}
+function draw(){$('#nav').innerHTML=tabs.map(t=>`<button class="${S.tab==t[0]?'on':''}" onclick="go('${t[0]}')"><span>${t[1]}</span>${t[2]}</button>`).join('');$('#m').innerHTML=V[S.tab]();const h=new Date().getHours();$('#hi').textContent=(h<12?'শুভ সকাল ☀️':h<18?'শুভ বিকাল 🌸':'শুভ সন্ধ্যা 🌙')+' — টাকা বাঁচাও, হাসি ছড়াও!'}
+const mpick=()=>`<input type="month" value="${S.mo}" onchange="S.mo=this.value;draw()">`;
+function pie(ty){const m={};D.tx.filter(t=>t.t==ty&&inM(t)).forEach(t=>m[t.c]=(m[t.c]||0)+t.a);const e=Object.entries(m).sort((a,b)=>b[1]-a[1]),T=e.reduce((s,x)=>s+x[1],0);if(!T)return'';let a=0;const g=e.map((x,i)=>{const s=a;a+=x[1]/T*100;return`${COL[i%10]} ${s}% ${a}%`}).join(',');return`<div class="row"><div class="pie" style="background:conic-gradient(${g})"></div><div class="lg">${e.map((x,i)=>`<div><i style="background:${COL[i%10]}"></i>${E(x[0])} ${f(x[1])}</div>`).join('')}</div></div>`}
+function txRow(t){const c=t.t=='t'?'🔁':IC[t.c]||'🏷️',acc=id=>(D.acc.find(a=>a.id==id)||{}).n;return`<div class="tx" onclick="addTx(${t.id})"><div class="ic">${c}</div><div><b>${E(t.n)}</b><br><small>${t.d} · ${t.t=='t'?E(acc(t.acc))+' → '+E(acc(t.to)):E(t.c)+(t.s?' › '+E(t.s):'')} ${t.tags?'· #'+E(t.tags):''}</small></div><div class="amt ${t.t=='e'?'neg':t.t=='i'?'pos':''}">${t.t=='e'?'-':t.t=='i'?'+':''}${f(t.a)}</div></div>`}
+const V={
+home(){const i=tot('i'),x=tot('e'),T=D.acc.reduce((s,a)=>s+bal(a),0),pv=tot('e',prev()),due=D.bills.filter(b=>!b.paid).sort((a,b)=>a.due>b.due?1:-1);
+const over=x>i&&i>0,mood=!D.tx.length?['Logo.svg','এখনো কিছু নেই! + চাপো আর শুরু করো 🐣']:over?['9.webp','আয়ের চেয়ে খরচ বেশি! পকেট কাঁদছে 😭']:x>pv&&pv?['8.webp','টাকা উড়ে যাচ্ছে! 🪽 গতমাসের চেয়ে বেশি খরচ']:['10.webp','দারুণ! তুমি টাকার রাজা/রানী 👑'];
+const fc=T+D.bills.filter(b=>!b.paid&&b.due.slice(0,7)==S.mo).reduce((s,b)=>s+(b.inc?b.amt:-b.amt),0);
+return`<div class="mas">${img(mood[0])}<div><b>${mood[1]}</b></div></div>${mpick()}<div class="grid"><div class="stat in"><small>আয়</small><b>${f(i)}</b></div><div class="stat ex"><small>খরচ</small><b>${f(x)}</b></div><div class="stat nt"><small>নেট</small><b>${f(i-x)}</b></div><div class="stat bl"><small>মোট ব্যালেন্স</small><b>${f(T)}</b></div></div><br>
+<div class="card"><h3>🍰 খরচের ভাগ</h3>${pie('e')||'<small>এই মাসে কোনো খরচ নেই</small>'}</div>
+<div class="card"><h3>🔮 মাস শেষে অনুমান</h3><b>${f(fc)}</b> <small>(projection, গ্যারান্টি নয়)</small></div>
+${due.length?`<div class="card"><h3>⏰ আসন্ন বিল</h3>${due.slice(0,3).map(b=>`<div class="tx"><div class="ic">${b.inc?'💰':'🧾'}</div><div><b>${E(b.n)}</b><br><small>${b.due}${b.due<td()?' · ⚠️ Overdue':''}</small></div><div class="amt">${f(b.amt)}</div></div>`).join('')}</div>`:''}
+<div class="card"><h3>🕒 সাম্প্রতিক</h3>${D.tx.slice().sort((a,b)=>a.d<b.d?1:-1).slice(0,5).map(txRow).join('')||'<small>খালি</small>'}</div>`},
+tx(){let l=D.tx.filter(t=>t.n.toLowerCase().includes(S.q.toLowerCase())||(t.tags||'').toLowerCase().includes(S.q.toLowerCase())).filter(t=>!S.mo||inM(t)).sort((a,b)=>a.d<b.d?1:-1);return`<div class="row">${mpick()}<input placeholder="🔍 নাম বা tag" value="${E(S.q)}" onchange="S.q=this.value;draw()"></div><div class="card">${l.map(txRow).join('')||'<div class="mas">'+img('6.svg')+'<br>কিচ্ছু পাওয়া যায়নি!</div>'}</div><small>ট্যাপ করে edit/delete/duplicate</small>`},
+rep(){const ty=S.rt,g=S.rg,m={};D.tx.filter(t=>t.t==ty&&(g=='c'?inM(t):1)).forEach(t=>{const k=g=='c'?t.c:g=='m'?t.d.slice(0,7):t.d;m[k]=(m[k]||0)+t.a});const e=Object.entries(m).sort((a,b)=>g=='c'?b[1]-a[1]:a[0]<b[0]?-1:1),mx=Math.max(1,...e.map(x=>x[1])),
+ins=[];Object.keys(D.cat.e).forEach(c=>{const a=tot('e',S.mo,c),b=tot('e',prev(),c);if(a>b*1.2&&b>0)ins.push(`📈 ${c} খরচ বেড়েছে (${f(b)} → ${f(a)})`);if(a<b*.8&&a>0)ins.push(`📉 ${c} খরচ কমেছে — ভালো!`)});if(tot('e')>tot('i')&&tot('i')>0)ins.push('⚠️ আয়ের চেয়ে খরচ বেশি');
+return`<div class="card"><div class="seg"><button class="${ty=='e'?'on':''}" onclick="S.rt='e';draw()">খরচ</button><button class="${ty=='i'?'on i':''}" onclick="S.rt='i';draw()">আয়</button></div><div class="seg"><button class="${g=='c'?'on':''}" onclick="S.rg='c';draw()">Category</button><button class="${g=='m'?'on':''}" onclick="S.rg='m';draw()">Month</button><button class="${g=='d'?'on':''}" onclick="S.rg='d';draw()">Day</button></div>${g=='c'?mpick():''}</div>
+<div class="card">${e.map(x=>`<div style="margin:8px 0"><div class="row sp"><span>${g=='c'?(IC[x[0]]||'🏷️')+' ':''}${E(x[0])}</span><b>${f(x[1])}</b></div><div class="bar"><i class="${ty=='e'?'d':''}" style="width:${x[1]/mx*100}%"></i></div></div>`).join('')||'<div class="mas">'+img('11.webp')+'<br>ডেটা নেই</div>'}</div>
+<div class="card"><h3>💡 Insights</h3>${ins.map(i=>`<div>${i}</div>`).join('')||'<small>আরও ডেটা দিলে insight আসবে</small>'}</div><button class="b g" onclick="csv()">⬇️ CSV Export</button>`},
+bud(){return`<div class="card"><div class="row sp"><h3>🎯 Budget</h3><button class="b s" onclick="addBud()">+ নতুন</button></div>${mpick()}${D.bud.map(b=>{const s=tot('e',S.mo,b.c),p=s/b.a*100;return`<div style="margin:10px 0" onclick="delItem('bud',${b.id})"><div class="row sp"><b>${IC[b.c]||''} ${E(b.c)}</b><span>${f(s)} / ${f(b.a)}</span></div><div class="bar"><i class="${p>=100?'d':p>=b.th?'w':''}" style="width:${Math.min(100,p)}%"></i></div><small>${p>=100?'🚨 সীমা পার! ওয়ালেট ICU-তে':p>=b.th?'⚠️ সাবধান, প্রায় শেষ':'✅ ঠিক আছে'} · ${Math.round(p)}%</small></div>`}).join('')||'<small>কোনো budget নেই</small>'}</div>
+<div class="card"><div class="row sp"><h3>🐷 Savings Goals</h3><button class="b s g" onclick="addGoal()">+ নতুন</button></div>${D.goals.map(g=>{const p=Math.min(100,g.s/g.t*100);return`<div style="margin:10px 0"><div class="row sp"><b>${E(g.n)}</b><span>${f(g.s)} / ${f(g.t)}</span></div><div class="bar"><i style="width:${p}%"></i></div><div class="row sp"><small>${Math.round(p)}% · বাকি ${f(Math.max(0,g.t-g.s))}${g.d?' · '+g.d:''}</small><span><button class="b s g" onclick="contrib(${g.id})">+ জমাও</button> <button class="b s o" onclick="delItem('goals',${g.id})">🗑</button></span></div></div>`}).join('')||'<div class="mas">'+img('4.webp')+'<br>স্বপ্ন দেখো, জমাও!</div>'}</div>
+<div class="card"><div class="row sp"><h3>📅 Bills & Scheduled</h3><button class="b s" onclick="addBill()">+ নতুন</button></div>${D.bills.slice().sort((a,b)=>a.due>b.due?1:-1).map(b=>`<div class="tx"><div class="ic">${b.inc?'💰':'🧾'}</div><div><b>${E(b.n)}</b><br><small>${b.due} · ${b.paid?'✅ Paid':b.due<td()?'⚠️ Overdue':'Upcoming'}${b.rep?' · 🔁':''}</small></div><div class="amt">${f(b.amt)}</div>${b.paid?'':`<button class="b s g" onclick="pay(${b.id})">✓</button>`}<button class="b s o" onclick="delItem('bills',${b.id})">🗑</button></div>`).join('')||'<small>কিছু নেই</small>'}</div>`},
+set(){return`<div class="card"><div class="row sp"><h3>👛 Accounts</h3><button class="b s" onclick="addAcc()">+ নতুন</button></div>${D.acc.map(a=>`<div class="tx"><div class="ic">👛</div><b>${E(a.n)}</b><div class="amt">${f(bal(a))}</div></div>`).join('')}<button class="b s g" onclick="xfer()">🔁 Transfer</button></div>
+<div class="card"><div class="row sp"><h3>🏷️ Categories</h3><button class="b s" onclick="addCat()">+ নতুন</button></div><small>${Object.keys(D.cat.e).join(', ')}</small></div>
+<div class="card"><h3>🔒 PIN</h3><input id="np" type="password" inputmode="numeric" maxlength="6" placeholder="নতুন PIN (খালি = বন্ধ)" value="${D.pin}"><button class="b" onclick="D.pin=$('#np').value;save();toast('PIN সেভ হয়েছে ✅')">Save PIN</button></div>
+<div class="card"><h3>💾 Backup / Restore</h3><textarea id="bk" rows="3" placeholder="Restore এর জন্য backup এখানে paste করো"></textarea><div class="row"><button class="b g" onclick="navigator.clipboard.writeText(JSON.stringify(D));toast('Backup copy হয়েছে — কোথাও save করো')">Copy Backup</button><button class="b" onclick="rest()">Restore</button></div></div>
+<div class="mas">${img('7.webp')}<br><small>মিতব্যয়ী v1 · সব ডেটা তোমার ফোনেই 💖</small></div>`}};
+function sheet(h){$('#sh').innerHTML=`<div class="sheet" onclick="if(event.target==this)cl()"><div>${h}</div></div>`}const cl=()=>$('#sh').innerHTML='';
+const opt=(l,v)=>l.map(x=>`<option ${x==v?'selected':''}>${E(x)}</option>`).join(''),aopt=(v)=>D.acc.map(a=>`<option value="${a.id}" ${a.id==v?'selected':''}>${E(a.n)}</option>`).join('');
+let TY='e';
+function addTx(id){const t=D.tx.find(x=>x.id==id)||{t:TY,d:td(),acc:D.acc[0].id,c:'',s:'',n:'',a:'',tags:'',note:''};TY=t.t;sheet(`<h3>${id?'✏️ Edit':'➕ নতুন'} লেনদেন</h3><div class="seg"><button id="te" class="${TY=='e'?'on':''}" onclick="setTy('e')">খরচ</button><button id="ti" class="${TY=='i'?'on i':''}" onclick="setTy('i')">আয়</button></div>
+<label>নাম</label><input id="n" value="${E(t.n)}" placeholder="যেমন: দুপুরের খাবার"><label>পরিমাণ (৳)</label><input id="a" type="number" inputmode="decimal" value="${t.a}"><label>Category</label><select id="c" onchange="subs()"></select><select id="s"></select><label>তারিখ</label><input id="d" type="date" value="${t.d}"><label>Account</label><select id="ac">${aopt(t.acc)}</select><label>Tags</label><input id="tg" value="${E(t.tags)}" placeholder="University, Family"><label>Note</label><input id="nt" value="${E(t.note)}">
+<div class="row"><button class="b g" style="flex:1" onclick="svTx(${id||0})">সেভ</button>${id?`<button class="b o" onclick="dupTx(${id})">Copy</button><button class="b o" onclick="delTx(${id})">🗑</button>`:''}</div>`);fillC(t.c,t.s)}
+function fillC(c,s){const k=Object.keys(D.cat[TY]);$('#c').innerHTML=opt(k,c);subs(s)}
+function subs(s){const l=D.cat[TY][$('#c').value]||[];$('#s').innerHTML=opt(l.length?l:['—'],s);$('#s').style.display=l.length?'':'none'}
+function setTy(t){TY=t;$('#te').className=t=='e'?'on':'';$('#ti').className=t=='i'?'on i':'';fillC()}
+function svTx(id){const a=+$('#a').value;if(!$('#n').value||!a)return toast('নাম আর পরিমাণ দাও 🙏');const o={id:id||uid(),t:TY,n:$('#n').value,a,c:$('#c').value,s:$('#s').style.display?$('#s').value:'',d:$('#d').value,acc:+$('#ac').value,tags:$('#tg').value,note:$('#nt').value};if(id)D.tx[D.tx.findIndex(x=>x.id==id)]=o;else D.tx.push(o);save();cl();draw();toast(TY=='e'?'খরচ লিখে রাখলাম 📝':'আয় এলো! 🎉');if(TY=='i')confetti();else chk(o)}
+const dupTx=id=>{const t={...D.tx.find(x=>x.id==id),id:uid(),d:td()};D.tx.push(t);save();cl();draw();toast('Duplicate হয়েছে')},delTx=id=>{if(confirm('মুছে ফেলবে?')){D.tx=D.tx.filter(x=>x.id!=id);save();cl();draw()}};
+function chk(t){D.bud.filter(b=>b.c==t.c).forEach(b=>{const p=tot('e',t.d.slice(0,7),b.c)/b.a*100,lv=p>=100?2:p>=b.th?1:0,key=t.d.slice(0,7)+lv;if(lv&&b.nf!=key){b.nf=key;save();notify(lv==2?'🚨 Budget শেষ!':'⚠️ Budget সতর্কতা',`${b.c}: ${Math.round(p)}% খরচ হয়ে গেছে`)}})}
+function addBud(){sheet(`<h3>🎯 নতুন Budget</h3><label>Category</label><select id="c">${opt(Object.keys(D.cat.e))}</select><label>মাসিক পরিমাণ</label><input id="a" type="number"><label>কত % এ সতর্ক করবো</label><input id="th" type="number" value="75"><button class="b g" onclick="D.bud.push({id:uid(),c:$('#c').value,a:+$('#a').value,th:+$('#th').value||75});save();cl();draw()">সেভ</button>`)}
+function addGoal(){sheet(`<h3>🐷 নতুন Goal</h3><label>নাম</label><input id="n"><label>লক্ষ্য (৳)</label><input id="t" type="number"><label>এখন জমা</label><input id="s" type="number" value="0"><label>তারিখ</label><input id="d" type="date"><button class="b g" onclick="D.goals.push({id:uid(),n:$('#n').value,t:+$('#t').value,s:+$('#s').value,d:$('#d').value});save();cl();draw()">সেভ</button>`)}
+function contrib(id){const v=+prompt('কত টাকা জমাবে?');if(!v)return;const g=D.goals.find(x=>x.id==id);g.s+=v;save();draw();if(g.s>=g.t){confetti();toast('🎉 লক্ষ্য পূরণ! অভিনন্দন!')}else toast('জমলো! 🐷')}
+function addBill(){sheet(`<h3>📅 নতুন Bill/Scheduled</h3><div class="seg"><button class="on" id="be" onclick="this.className='on';bi.className='';BI=0">খরচ</button><button id="bi" onclick="this.className='on i';be.className='';BI=1">আয়</button></div><label>নাম</label><input id="n"><label>পরিমাণ</label><input id="a" type="number"><label>তারিখ</label><input id="d" type="date" value="${td()}"><label>Account</label><select id="ac">${aopt()}</select><label>Category</label><select id="c">${opt(Object.keys(D.cat.e))}</select><label><input type="checkbox" id="rp" style="width:auto"> প্রতি মাসে repeat</label><button class="b g" onclick="svBill()">সেভ</button>`);BI=0}let BI=0;
+function svBill(){const b={id:uid(),n:$('#n').value,amt:+$('#a').value,due:$('#d').value,acc:+$('#ac').value,c:BI?'Other income':$('#c').value,inc:BI,rep:$('#rp').checked,paid:false};if(!b.n||!b.amt)return toast('নাম আর পরিমাণ দাও');D.bills.push(b);save();sched(b);cl();draw()}
+function sched(b){const at=new Date(b.due+'T09:00:00');at.setDate(at.getDate()-1);if(at>new Date())notify('⏰ কাল '+b.n,f(b.amt)+' '+(b.inc?'আসার কথা':'দিতে হবে'),at)}
+function pay(id){const b=D.bills.find(x=>x.id==id),a=+prompt('আসল পরিমাণ কত?',b.amt);if(!a)return;b.paid=true;D.tx.push({id:uid(),t:b.inc?'i':'e',n:b.n,a,c:b.c,s:'',d:td(),acc:b.acc,tags:'',note:'scheduled'});if(b.rep){const d=new Date(b.due);d.setMonth(d.getMonth()+1);const nb={...b,id:uid(),due:d.toISOString().slice(0,10),paid:false};D.bills.push(nb);sched(nb)}save();draw();toast('Paid ✅')}
+const delItem=(k,id)=>{if(confirm('মুছে ফেলবে?')){D[k]=D[k].filter(x=>x.id!=id);save();draw()}};
+function addAcc(){sheet(`<h3>👛 নতুন Account</h3><label>নাম</label><input id="n" placeholder="Nagad / Savings"><label>শুরুর ব্যালেন্স</label><input id="a" type="number" value="0"><button class="b g" onclick="D.acc.push({id:uid(),n:$('#n').value,b:+$('#a').value});save();cl();draw()">সেভ</button>`)}
+function xfer(){sheet(`<h3>🔁 Transfer</h3><label>From</label><select id="fr">${aopt()}</select><label>To</label><select id="to">${aopt(D.acc[1]?.id)}</select><label>পরিমাণ</label><input id="a" type="number"><button class="b g" onclick="if($('#fr').value==$('#to').value||!+$('#a').value)return toast('ঠিকমতো দাও');D.tx.push({id:uid(),t:'t',n:'Transfer',a:+$('#a').value,acc:+$('#fr').value,to:+$('#to').value,c:'',d:td()});save();cl();draw()">Transfer (খরচ গণ্য হবে না)</button>`)}
+function addCat(){sheet(`<h3>🏷️ নতুন Category</h3><div class="seg"><button class="on" id="ce" onclick="this.className='on';ci.className='';CT='e'">খরচ</button><button id="ci" onclick="this.className='on i';ce.className='';CT='i'">আয়</button></div><label>নাম</label><input id="n"><label>Subcategories (কমা দিয়ে)</label><input id="sb"><button class="b g" onclick="D.cat[CT][$('#n').value]=$('#sb').value.split(',').map(x=>x.trim()).filter(Boolean);save();cl();draw()">সেভ</button>`);CT='e'}let CT='e';
+function csv(){const r=['Date,Type,Name,Amount,Category,Sub,Account,Tags'].concat(D.tx.map(t=>[t.d,t.t,t.n,t.a,t.c,t.s,(D.acc.find(a=>a.id==t.acc)||{}).n,t.tags].map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')));navigator.clipboard.writeText(r.join('\n'));toast('CSV copy হয়েছে — Sheets/Notes এ paste করো 📋')}
+function rest(){try{const o=JSON.parse($('#bk').value);if(!o.tx||!o.acc)throw 0;if(confirm('বর্তমান ডেটা বদলে যাবে। ঠিক আছে?')){D=o;save();draw();toast('Restore হয়েছে ✅')}}catch(e){toast('Backup ঠিক নেই ❌')}}
+function lock(){if(!D.pin)return;$('#lock').style.display='flex';$('#pin').value=''}
+$('#pin').oninput=e=>{if(e.target.value==D.pin){$('#lock').style.display='none'}else if(e.target.value.length>=D.pin.length)$('#pe').textContent='ভুল PIN 🙈'};
+document.addEventListener('visibilitychange',()=>document.hidden&&lock());lock();draw();
+</script></body></html>
